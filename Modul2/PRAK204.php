@@ -24,18 +24,13 @@
                 $result = "Belasan";
             } elseif ($value >= 20 && $value < 100) {
                 $result = "Puluhan";
-            } elseif ($value == 100) {
-                $result = "Anda Menginput Melebihi Limit Bilangan";
-            }
-            elseif ($value > 100 && $value < 1000) {
+            } elseif ($value >= 100 && $value < 1000) {
                 $result = "Ratusan";
-            } elseif ($value >= 1000 && $value < 10000) {
-                $result = "Ribuan";
             } else {
-                $result = "Nilai terlalu besar";
+                $result = "Anda Menginput Melebihi Limit Bilangan";
             } 
 
-            echo "<b>Hasil:</b><br>" . $result;
+            echo "<b>Hasil:</b><b>" . $result . "</b>" ;
         }
         ?>
     </body>
