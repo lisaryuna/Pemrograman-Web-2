@@ -7,7 +7,7 @@
         <form action="" method="POST">
             Jumlah Peserta: <input type="number" name="jumlah" min="1" required>
             <br>
-            <button type="submit">Cetak</button>
+            <button type="submit" name="submit">Cetak</button>
         </form>
 
         <?php 
@@ -16,7 +16,13 @@
             $i = 1;
 
             while($i <= $jumlah) {
-                echo "Peserta ke-" . $i . "<br>";
+                if ($i % 2 == 1) {
+                    $warna = "red";
+                } else {
+                    $warna = "green";
+                }
+
+                echo "<h2 style='color: $warna;'>Peserta ke-$i</h2>";
                 $i++;
             }
         }

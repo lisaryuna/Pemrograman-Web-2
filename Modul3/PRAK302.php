@@ -7,7 +7,8 @@
         <form action="" method="POST">
             Tinggi: <input type="number" name="tinggi" required><br>
             Alamat Gambar: <input type="url" name="alamat" required><br>
-            <button type="submit">Cetak</button>
+            <button type="submit" name="submit">Cetak</button>
+            <br>
         </form>
         <?php
         if(isset($_POST['submit'])) {

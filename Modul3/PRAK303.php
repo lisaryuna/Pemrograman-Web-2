@@ -7,14 +7,14 @@
         <form action="" method="POST">
             Batas Bawah: <input type="number" name="bawah" required><br>
             Batas Atas: <input type="number" name="atas" required><br>
-            <button type="submit">Cetak</button>
+            <button type="submit" name="submit">Cetak</button>
         </form>
 
         <?php 
         if(isset($_POST['submit'])) {
             $bawah = $_POST['bawah'];
             $atas = $_POST['atas'];
-            $star_url = "https://cdn-icons-png.flaticon.com/512/118/118669.png";
+            $star_url = "star.png";
 
             do {
                 if(($bawah + 7) % 5 == 0) {

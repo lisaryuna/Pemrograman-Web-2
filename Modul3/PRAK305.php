@@ -5,7 +5,7 @@
     </head>
     <body>
         <form action="" method="POST">
-            <input type="number" name="string" required><br>
+            <input type="string" name="string" required>
             <button type="submit" name="submit">Submit</button>
         </form>
         <?php 

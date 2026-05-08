@@ -18,7 +18,7 @@
             $bintang--;
         }
 
-        $star_url = "https://cdn-icons-png.flaticon.com/512/118/118669.png";
+        $star_url = "star.png";
         ?>
 
         <?php if($bintang == 0): ?>
