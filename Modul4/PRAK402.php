@@ -2,6 +2,12 @@
 <html>
     <head>
         <title>PRAK402</title>
+        <style>
+            th {
+                text-align: left;
+                background-color: #d3d3d3;
+            }
+        </style>
     </head>
     <body>
         <?php 
@@ -31,15 +37,16 @@
         }
         ?>
 
-        <table border="1" cellpadding="5" cellspacing="0" style="background-color: #f2f2f2;">
+        <table border="1" cellpadding="5" cellspacing="0">
             <tr>
                 <th>Nama</th>
                 <th>NIM</th>
-                <th>UTS</th>
-                <th>UAS</th>
+                <th>Nilai UTS</th>
+                <th>Nilai UAS</th>
                 <th>Nilai Akhir</th>
-                <th>Huruf</th>
+                <th>Huruf</th> 
             </tr>
+            
             <?php foreach($mahasiswa as $row) : ?>
             <tr>
                 <td><?= $row["nama"] ?></td>

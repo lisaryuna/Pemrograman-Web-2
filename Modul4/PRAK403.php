@@ -2,6 +2,7 @@
 <html>
     <head>
         <title>PRAK403</title>
+        <style> th {text-align: left;}</style>
     </head>
     <body>
         <?php 
@@ -32,7 +33,7 @@
                     ["nama_mk" => "Rekayasa Perangkat Lunak", "sks" => 3],
                     ["nama_mk" => "Analisis dan Perancangan Sistem", "sks" => 3],
                     ["nama_mk" => "Komputasi Awan", "sks" => 3],
-                    ["nama_mk" => "Kecerdasan Buatan", "sks" => 3]
+                    ["nama_mk" => "Kecerdasan Bisnis", "sks" => 3]
                 ]
             ]
         ];
@@ -53,7 +54,7 @@
         ?>
 
         <table border="1" cellpadding="5" cellspacing="0">
-            <tr>
+            <tr style="background-color: #d3d3d3;">
                 <th>No</th>
                 <th>Nama</th>
                 <th>Mata Kuliah diambil</th>
@@ -61,28 +62,31 @@
                 <th>Total SKS</th>
                 <th>Keterangan</th>
             </tr>
+            
             <?php foreach($data as $row) : ?>
-                <?php $jumlah_matkul = count($row["matkul"]); ?>
+                <?php 
+                    $jumlah_matkul = count($row["matkul"]); 
+                    $bg_color = ($row["keterangan"] == "Revisi KRS") ? "red" : "#28a745";
+                ?>
                 <tr>
-                    <td rowspan="<?= $jumlah_matkul ?>"><?= $row["no"] ?></td>
-                    <td rowspan="<?= $jumlah_matkul ?>"><?= $row["nama"] ?></td>
-
+                    <td><?= $row["no"] ?></td>
+                    <td><?= $row["nama"] ?></td>
                     <td><?= $row["matkul"][0]["nama_mk"] ?></td>
                     <td><?= $row["matkul"][0]["sks"] ?></td>
-
-                    <td rowspan="<?= $jumlah_matkul ?>"><?= $row["total_sks"] ?></td>
-                    <?php 
-                    $bg_color = ($row["keterangan"] == "Revisi KRS") ? "red" : "green";
-                    ?>
-                    <td rowspan="<?= $jumlah_matkul ?>" style="background-color: <?= $bg_color ?>; color: white;">
+                    <td><?= $row["total_sks"] ?></td>
+                    <td style="background-color: <?= $bg_color ?>; color: black;">
                         <?= $row["keterangan"] ?>
                     </td>
                 </tr>
 
                 <?php for ($j = 1; $j < $jumlah_matkul; $j++) : ?>
                     <tr>
+                        <td></td> 
+                        <td></td> 
                         <td><?= $row["matkul"][$j]["nama_mk"] ?></td>
                         <td><?= $row["matkul"][$j]["sks"] ?></td>
+                        <td></td> 
+                        <td></td> 
                     </tr>
                 <?php endfor; ?>
             <?php endforeach; ?>
