@@ -9,7 +9,7 @@
 
     <body>
         <div class="home-container">
-            <img src="https://images.unsplash.com/photo-1463320726281-696a485928c7?q=80&w=800&auto=format&fit=crop" alt="Ilustrasi Buku dan Alam" class="home-image">
+            <img src="https://images.unsplash.com/photo-1463320726281-696a485928c7?q=80&w=800&auto=format&fit=crop" alt="Ilustrasi Buku" class="home-image">
             
             <h1>Perpustakaan Lisa</h1>
             <p class="home-subtitle">
