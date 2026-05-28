@@ -22,7 +22,5 @@
                 <a href="Peminjaman.php"><button>Kelola Peminjaman</button></a>
             </div>
         </div>
-
-        <script src="../assets/js/script.js"></script>
     </body>
 </html>
