@@ -9,15 +9,18 @@ $member = getMember();
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Kelola Member - Perpustakaan Lisa</title>
+        <link rel="stylesheet" href="../assets/css/style.css">
     </head>
     <body>
-        <center>
+        <div class="page-container">
             <h2>Kelola Member</h2>
 
-            <a href="Index.php">Kembali ke Beranda</a><br><br>
-            <a href="FormMember.php">Tambah Member</a><br><br>
+            <div class="action-buttons">
+                <a href="Index.php"><button>Kembali ke Beranda</button></a>
+                <a href="FormMember.php"><button>Tambah Member</button></a>
+            </div>
 
-            <table border="1" cellpadding="10" cellspacing="0">
+            <table>
                 <tr>
                     <th>ID Member</th>
                     <th>Nama Member</th>
@@ -43,6 +46,6 @@ $member = getMember();
                 </tr>
                 <?php endforeach; ?>
             </table>
-        </center>
+        </div>
     </body>
 </html>

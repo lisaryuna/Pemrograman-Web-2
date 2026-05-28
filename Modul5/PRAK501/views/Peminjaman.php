@@ -9,15 +9,19 @@ $peminjaman = getPeminjaman();
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Kelola Peminjaman - Perpustakaan Lisa</title>
+        <link rel="stylesheet" href="../assets/css/style.css">
     </head>
     <body>
-        <center>
+        <div class="page-container">
             <h2>Kelola Peminjaman</h2>
 
-            <a href="Index.php">Kembali ke Beranda</a><br><br>
-            <a href="FormPeminjaman.php">Tambah Peminjaman</a><br><br>
+            <div class="action-buttons">
+                <a href="Index.php"><button>Kembali ke Beranda</button></a>
+                <a href="FormPeminjaman.php"><button>Tambah Peminjaman</button></a>
 
-            <table border="1" cellpadding="10" cellspacing="0">
+            </div>
+
+            <table>
                 <tr>
                     <th>ID Peminjaman</th>
                     <th>Nama Member</th>
@@ -41,6 +45,6 @@ $peminjaman = getPeminjaman();
                 </tr>
                 <?php endforeach; ?>
             </table>
-        </center>
+        </div>
     </body>
 </html>

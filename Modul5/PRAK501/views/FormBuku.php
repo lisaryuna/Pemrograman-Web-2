@@ -17,9 +17,10 @@ if (isset($_GET['id'])) {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title><?= $isEdit ? 'Edit Buku' : 'Tambah Buku'; ?> - Perpustakaan Lisa</title>
+        <link rel="stylesheet" href="../assets/css/style.css">
     </head>
     <body>
-        <center>
+        <div class="form-container">
             <h2><?= $isEdit ? 'Edit Data Buku' : 'Tambah Buku'; ?></h2>
 
             <form action="../controllers/BukuController.php?action=<?= $isEdit ? 'edit' : 'tambah'; ?>" method="post">
@@ -28,7 +29,7 @@ if (isset($_GET['id'])) {
                     <input type="hidden" name="id_buku" value="<?= $buku['id_buku']; ?>">
                 <?php endif; ?>
 
-                <table border="0" cellpadding="5">
+                <table class="form-table">
                     <tr>
                         <td>Judul Buku</td>
                         <td>:</td>
@@ -53,11 +54,11 @@ if (isset($_GET['id'])) {
                         <td colspan="3" align="center">
                             <br>
                             <button type="submit" name="submit"><?= $isEdit ? 'Update' : 'Simpan'; ?></button>
-                            <a href="Buku.php" style="text-decoration: none;"><button type="button">Batal</button></a>
+                            <a href="Buku.php" style="text-decoration: none;"><button type="button" class="btn-cancel">Batal</button></a>
                         </td>
                     </tr>
                 </table>
             </form>
-        </center>
+        </div>
     </body>
 </html>
