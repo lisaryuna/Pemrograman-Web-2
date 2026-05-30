@@ -31,6 +31,24 @@ class PengalamanSeeder extends Seeder
                 'gambar' => 'https://source.unsplash.com/random/300x300/?nature',
                 'created_at' => now(),
                 'updated_at' => now(),
+            ],
+            [
+                'judul' => 'Sesuatu',
+                'deskripsi' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, doloremque.',
+                'tanggal' => '24 - 26 Oktober 2025',
+                'kesan' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, doloremque.',
+                'gambar' => 'https://source.unsplash.com/random/300x300/?nature',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'judul' => 'Sesuatu',
+                'deskripsi' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, doloremque.',
+                'tanggal' => '24 - 26 Oktober 2025',
+                'kesan' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, doloremque.',
+                'gambar' => 'https://source.unsplash.com/random/300x300/?nature',
+                'created_at' => now(),
+                'updated_at' => now(),
             ]
         ]);
     }
