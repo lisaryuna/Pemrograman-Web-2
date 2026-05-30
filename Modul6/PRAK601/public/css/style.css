@@ -1,0 +1,81 @@
+:root {
+    --old-copper: #775537;
+    --butter-yellow: #FBE29D;
+    --nebula: #C0DDDA;
+    --seashell: #F1F1F1;
+}
+
+body {
+    background: linear-gradient(135deg, var(--butter-yellow) 0%, var(--nebula) 100%);
+    min-height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.navbar {
+    background-color: var(--old-copper) !important;
+    box-shadow: 0 4px 15px rgba(119, 85, 55, 0.2);
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: rgba(251, 226, 157, 0.8) !important;
+}
+.navbar-dark .navbar-nav .nav-link.active,
+.navbar-dark .navbar-nav .nav-link:hover {
+    color: var(--butter-yellow) !important;
+    font-weight: 600;
+}
+
+.card, .bg-white {
+    background-color: var(--seashell) !important;
+    border-radius: 20px;
+    border: none !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05) !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(119, 85, 55, 0.2) !important; 
+}
+
+.btn-primary {
+    background-color: var(--old-copper);
+    border-color: var(--old-copper);
+    color: var(--seashell);
+    border-radius: 12px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover, .btn-primary:active, .btn-primary:focus {
+    background-color: var(--old-copper) !important;
+    border-color: var(--old-copper) !important;
+    color: var(--seashell) !important;
+    filter: brightness(1.1);
+    box-shadow: 0 0 0 0.25rem rgba(119, 85, 55, 0.4) !important; 
+}
+
+.btn-outline-primary {
+    color: var(--old-copper);
+    border-color: var(--old-copper);
+    border-radius: 10px;
+}
+.btn-outline-primary:hover, .btn-outline-primary:active, .btn-outline-primary:focus {
+    background-color: var(--nebula) !important;
+    border-color: var(--nebula) !important;
+    color: var(--old-copper) !important;
+    box-shadow: 0 0 0 0.25rem rgba(192, 221, 218, 0.5) !important; 
+}
+
+.text-primary { color: var(--old-copper) !important; }
+.bg-primary { background-color: var(--old-copper) !important; }
+
+.badge.bg-primary {
+    background-color: transparent !important;
+    color: var(--old-copper) !important;
+    border: 2px solid var(--old-copper);
+    border-radius: 30px;
+    font-weight: 600;
+    padding: 8px 16px !important;
+    letter-spacing: 0.5px;
+}
