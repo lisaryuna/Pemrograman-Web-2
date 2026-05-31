@@ -13,7 +13,7 @@ class Mahasiswa
             'fakultas' => 'Teknik',
             'universitas' => 'Universitas Lambung Mangkurat',
             'skill' => 'Java, Kotlin, PHP, HTML, CSS',
-            'foto' => 'https://source.unsplash.com/random/300x300/?face',
+            'foto' => 'images/profile.jpeg',
         ];
     }
 }
