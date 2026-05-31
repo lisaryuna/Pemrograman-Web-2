@@ -4,7 +4,7 @@
 <div class="row py-5">
     <div class="col-md-4 mb-4">
         <div class="card p-4 text-center">
-            <img src="https://ui-avatars.com/api/?name={{ urlencode($profil['nama']) }}&size=300&background=FBE29D&color=775537" alt="Profil" class="rounded-circle mx-auto mb-3" style="width: 150px; height: 150px; object-fit: cover;">
+            <img src="{{ asset($profil['foto']) }}" alt="Profil" class="rounded-circle mx-auto mb-3" style="width: 150px; height: 150px; object-fit: cover;">
             <h4 class="fw-bold text-primary">{{ $profil['nama'] }}</h4>
             <p class="text-muted mb-4">{{ $profil['nim'] }}</p>
             
@@ -23,7 +23,7 @@
             @foreach($pengalaman as $item)
             <div class="col">
                 <div class="card h-100 overflow-hidden">
-                    <img src="{{ $item->gambar }}" class="card-img-top" alt="{{ $item->judul }}" style="height: 200px; object-fit: cover;">
+                    <img src="{{ asset($item->gambar) }}" class="card-img-top" alt="{{ $item->judul }}" style="height: 500px; object-fit: cover;">
                     <div class="card-body p-4 d-flex flex-column">
                         <h5 class="fw-bold text-primary">{{ $item->judul }}</h5>
                         <span class="badge bg-primary mb-3" style="width: fit-content;">{{ $item->tanggal }}</span>

@@ -9,9 +9,9 @@
             <h2 class="fw-bold text-primary">{{ $detail->judul }}</h2>
         </div>
 
-        <img src="{{ $detail->gambar }}" class="card-img-top" alt="{{ $detail->judul }}" style="height: 450px; object-fit: cover;">
-        
-        <div class="mb-4">
+        <img src="{{ asset($detail->gambar) }}" class="card-img-top mb-5 rounded" alt="{{ $detail->judul }}" style="height: auto; width: 100%; object-fit: cover;">
+
+        <div class="mb-5">
             <h5 class="fw-bold text-primary">Deskripsi Kegiatan</h5>
             <p class="text-secondary" style="line-height: 1.8;">{{ $detail->deskripsi }}</p>
         </div>
