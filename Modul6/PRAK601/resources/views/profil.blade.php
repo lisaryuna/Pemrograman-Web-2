@@ -12,6 +12,7 @@
                 <p class="mb-2"><strong>Fakultas:</strong><br>{{ $profil['fakultas'] }}</p>
                 <p class="mb-2"><strong>Prodi:</strong><br>{{ $profil['prodi'] }}</p>
                 <p class="mb-2"><strong>Universitas:</strong><br>{{ $profil['universitas'] }}</p>
+                <p class="mb-2"><strong>Hobi:</strong><br>{{ $profil['hobi'] }}</p>
                 <p class="mb-0"><strong>Skill:</strong><br>{{ $profil['skill'] }}</p>
             </div>
         </div>
