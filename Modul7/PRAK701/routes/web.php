@@ -17,3 +17,7 @@ Route::get('/buku', function () {
 Route::get('/buku/create', function () {
     return view('buku.create');
 });
+
+Route::get('/buku/{id}/edit', function ($id) {
+    return view('buku.edit', ['id' => $id]);
+});

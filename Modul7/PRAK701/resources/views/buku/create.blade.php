@@ -48,6 +48,7 @@
             class="w-full px-4 py-2.5 bg-ghost-white border border-periwinkle/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-soft-periwinkle focus:border-transparent transition-colors 
             @error('tahun_terbit') border-red-400 @enderror"
             placeholder="Contoh: 2023">
+            <p class="text-xs text-gray-400 mt-1">Rentang tahun valid: 1800 - 2026</p>
             @error('tahun_terbit')
                 <p class="text-red-500 text-xs mt-1 font-medium">{{ $message }}</p>
             @enderror
