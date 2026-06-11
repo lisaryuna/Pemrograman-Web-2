@@ -32,18 +32,19 @@
                 </tr>
             </thead>
             <tbody class="divide-y divide-gray-100">
+                @foreach ($buku as $index => $item)
                 <tr class="hover:bg-gray-50 transition-colors">
-                    <td class="px-6 py-4">1</td>
-                    <td class="px-6 py-4 font-medium text-gray-800">Pemrograman Web dengan Laravel</td>
-                    <td class="px-6 py-4">Budi Santoso</td>
-                    <td class="px-6 py-4">Erlangga</td>
-                    <td class="px-6 py-4">2023</td>
+                    <td class="px-6 py-4">{{ $index + 1 }}</td>
+                    <td class="px-6 py-4 font-medium text-gray-800">{{ $item->judul }}</td>
+                    <td class="px-6 py-4">{{ $item->penulis }}</td>
+                    <td class="px-6 py-4">{{ $item->penerbit }}</td>
+                    <td class="px-6 py-4">{{ $item->tahun_terbit }}</td>
                     <td class="px-6 py-4 text-center">
                         <div class="flex justify-center gap-2">
-                            <a href="#" class="px-3 py-1.5 text-xs font-medium text-soft-periwinkle border border-soft-periwinkle hover:bg-soft-periwinkle hover:text-white rounded transition-colors">
+                            <a href="{{ route('buku.edit', $item->buku_id) }}" class="px-3 py-1.5 text-xs font-medium text-soft-periwinkle border border-soft-periwinkle hover:bg-soft-periwinkle hover:text-white rounded transition-colors">
                             Edit
                         </a>
-                        <form action="#" method="POST" class="inline">
+                        <form action="{{ route('buku.destroy', $item->buku_id) }}" method="POST" class="inline">
                             @csrf
                             @method('DELETE')
                             <button type="submit" onclick="return confirm('Apakah Anda yakin ingin menghapus buku ini?')" class="px-3 py-1.5 text-xs font-medium text-red-500 border border-red-500 hover:bg-red-500 hover:text-white rounded transition-colors">
@@ -53,12 +54,13 @@
                         </div>
                     </td>
                 </tr>
+                @endforeach
             </tbody>
         </table>
     </div>
 
     <div class="px-6 py-4 border-t border-gray-100">
-        <p class="text-xs text-gray-400">Menampilkan 1 data (data dummy statis)</p>
+        <p class="text-xs text-gray-400">Menampilkan {{ $buku->count() }} buku</p>
     </div>
 </div>
 @endsection
