@@ -4,12 +4,14 @@
 <div class="flex justify-between items-center mb-6">
     <div>
         <h1 class="text-3xl font-bold text-soft-periwinkle">Katalog Buku</h1>
-        <p class="text-gray-500 mt-1">Kelola data buku perpustakaan.</p>
+        <p class="text-gray-500 mt-1">Daftar koleksi buku perpustakaan.</p>
     </div>
 
+    @if(auth()->check() && auth()->user()->peran === 'admin')
     <a href="/buku/create" class="px-5 py-2.5 bg-soft-periwinkle hover:bg-periwinkle text-white rounded-lg font-medium shadow-md">
         + Tambah Buku Baru
     </a>
+    @endif
 </div>
 
 @if(session('success'))
@@ -28,7 +30,10 @@
                     <th scope="col" class="px-6 py-4">Penulis</th>
                     <th scope="col" class="px-6 py-4">Penerbit</th>
                     <th scope="col" class="px-6 py-4">Tahun Terbit</th>
-                    <th scope="col" class="px-6 py-4">Aksi</th>
+                    
+                    @if(auth()->check() && auth()->user()->peran === 'admin')
+                        <th scope="col" class="px-6 py-4">Aksi</th>
+                    @endif
                 </tr>
             </thead>
             <tbody class="divide-y divide-gray-100">
@@ -38,24 +43,26 @@
                     <td class="px-6 py-4 font-medium text-gray-800">{{ $item->judul }}</td>
                     <td class="px-6 py-4">{{ $item->penulis }}</td>
                     <td class="px-6 py-4">{{ $item->penerbit }}</td>
-                    <td class="px-6 py-4">{{ $item->tahun_terbit }}</td>
+                    <td class="px-6 py-4">{{ $item->tahun_terbit }}</td>                        
+                    
+                    @if(auth()->check() && auth()->user()->peran === 'admin')
                     <td class="px-6 py-4 text-center">
                         <div class="flex justify-center gap-2">
                             <a href="{{ route('buku.edit', $item->buku_id) }}" class="px-3 py-1.5 text-xs font-medium text-soft-periwinkle border border-soft-periwinkle hover:bg-soft-periwinkle hover:text-white rounded transition-colors">
-                            Edit
-                        </a>
-                        <form action="{{ route('buku.destroy', $item->buku_id) }}" method="POST" class="inline">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" onclick="return confirm('Apakah Anda yakin ingin menghapus buku ini?')" class="px-3 py-1.5 text-xs font-medium text-red-500 border border-red-500 hover:bg-red-500 hover:text-white rounded transition-colors">
-                                Hapus
-                            </button>
-                        </form>
-                        </div>
-                    </td>
+                                Edit
+                            </a>
+                            <form action="{{ route('buku.destroy', $item->buku_id) }}" method="POST" class="inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" onclick="return confirm('Apakah Anda yakin ingin menghapus buku ini?')" class="px-3 py-1.5 text-xs font-medium text-red-500 border border-red-500 hover:bg-red-500 hover:text-white rounded transition-colors">
+                                    Hapus
+                                </button>
+                            </form>
+                        </div>                        </td>
+                    @endif
                 </tr>
                 @endforeach
-            </tbody>
+                </tbody>
         </table>
     </div>
 
