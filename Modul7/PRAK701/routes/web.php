@@ -13,3 +13,7 @@ Route::get('/dashboard', function () {
 Route::get('/buku', function () {
     return view('buku.index');
 });
+
+Route::get('/buku/create', function () {
+    return view('buku.create');
+});
