@@ -14,15 +14,29 @@
             </div>
 
             <nav class="flex-1 p-4 space-y-4">
-                <a href="/dashboard" class="block px-4 py-2.5 rounded-lg bg-soft-periwinkle text-white font-medium shadow-md transition-all">
+                <a href="/dashboard" class="block px-4 py-2.5 rounded-lg font-medium transition-all {{ request()->is('dashboard') ? 'bg-soft-periwinkle text-white shadow-md' : 'text-gray-600 hover:bg-antique-white hover:text-soft-periwinkle' }}">
                     Dashboard
                 </a>
-                <a href="/buku" class="block px-4 py-2.5 rounded-lg text-gray-600 hover:bg-antique-white hover:text-soft-periwinkle font-medium transition-all">
+
+                <a href="/buku" class="block px-4 py-2.5 rounded-lg font-medium transition-all {{ request()->is('buku*') ? 'bg-soft-periwinkle text-white shadow-md' : 'text-gray-600 hover:bg-antique-white hover:text-soft-periwinkle' }}">
                     Katalog Buku
                 </a>
-                <a href="/peminjaman" class="block px-4 py-2.5 rounded-lg text-gray-600 hover:bg-antique-white hover:text-soft-periwinkle font-medium transition-all">
-                    Peminjaman
-                </a>
+
+                @if(auth()->check() && auth()->user()->peran === 'admin')
+                    <a href="/kategori" class="block px-4 py-2.5 rounded-lg font-medium transition-all {{ request()->is('kategori*') ? 'bg-soft-periwinkle text-white shadow-md' : 'text-gray-600 hover:bg-antique-white hover:text-soft-periwinkle' }}">
+                        Kategori Buku
+                    </a>
+
+                    <a href="/peminjaman" class="block px-4 py-2.5 rounded-lg font-medium transition-all {{ request()->is('peminjaman*') ? 'bg-soft-periwinkle text-white shadow-md' : 'text-gray-600 hover:bg-antique-white hover:text-soft-periwinkle' }}">
+                        Sirkulasi Admin
+                    </a>
+                @endif
+                
+                @if(auth()->check() && auth()->user()->peran === 'anggota')
+                    <a href="/riwayat-pinjam" class="block px-4 py-2.5 rounded-lg font-medium transition-all {{ request()->is('riwayat-pinjam*') ? 'bg-soft-periwinkle text-white shadow-md' : 'text-gray-600 hover:bg-antique-white hover:text-soft-periwinkle' }}">
+                        Buku Pinjamanku
+                    </a>
+                @endif
             </nav>
 
             <div class="p-4 border-t border-periwinkle/30">
@@ -38,10 +52,10 @@
         <main class="flex-1 flex flex-col">
             <header class="bg-white border-b border-periwinkle/30 p-4 flex justify-end items-center shadow-sm h-[73px]">
                 <div class="flex items-center gap-3">
-                    <div class="w-8 h-8 rounded-full bg-peach-fuzz text-soft-periwinkle flex items-center justify-center font-bold">
-                        A
+                    <div class="w-8 h-8 rounded-full bg-peach-fuzz text-soft-periwinkle flex items-center justify-center font-bold uppercase">
+                        {{ substr(auth()->user()->nama_user, 0, 1) }}
                     </div>
-                    <span class="font-medium text-gray-600 mr-4">Halo, Admin</span>
+                    <span class="font-medium text-gray-600 mr-4">Halo, {{ explode(' ', auth()->user()->nama_user)[0] }}</span>
                 </div>
             </header>
 
