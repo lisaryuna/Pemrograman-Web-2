@@ -19,7 +19,7 @@
             </div>
         @endif
 
-        <form action="#" method="POST" class="space-y-5">
+        <form action="/login" method="POST" class="space-y-5">
             @csrf
             <div>
                 <label for="email" class="block text-sm font-medium text-soft-periwinkle mb-1">Email</label>
