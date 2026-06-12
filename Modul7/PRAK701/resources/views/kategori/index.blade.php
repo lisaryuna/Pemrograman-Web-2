@@ -1,55 +1,52 @@
 @extends('layouts.app')
 @section('title', 'Manajemen Kategori - PerpusTech')
 @section('content')
-<div class="flex justify-between items-center mb-6">
-    <div>
-        <h1 class="text-3xl font-bold text-soft-periwinkle">Kategori Buku</h1>
-        <p class="text-gray-500 mt-1">Kelola daftar kategori untuk klasifikasi buku.</p>
+<div class="mb-8 flex items-center gap-4">
+    <div class="w-12 h-12 rounded-2xl bg-white shadow-sm border border-periwinkle/30 flex items-center justify-center text-soft-periwinkle">
+        <i class='bx bx-category text-2xl'></i>
     </div>
-    <a href="/kategori/create" class="px-5 py-2.5 bg-soft-periwinkle hover:bg-periwinkle text-white rounded-lg font-medium shadow-md">
-        + Tambah Kategori
-    </a>
+    <div>
+        <h1 class="text-3xl font-bold text-gray-800">Kategori Buku</h1>
+        <p class="text-gray-500 mt-0.5 text-sm">Kelola klasifikasi koleksi buku perpustakaan.</p>
+    </div>
 </div>
 
 @if(session('success'))
-<div class="mb-6 p-4 bg-green-50 border border-green-200 text-green-700 rounded-lg text-sm">
-    {{ session('success') }}
+<div class="mb-6 p-4 bg-green-50 border border-green-200 text-green-700 rounded-xl text-sm flex items-center gap-2">
+    <i class='bx bx-check-circle text-lg'></i> {{ session('success') }}
 </div>
 @endif
 
-<div class="bg-white rounded-2xl shadow-sm border border-periwinkle/30 overflow-hidden max-w-2xl">
-    <div class="overflow-x-auto">
-        <table class="w-full text-left text-sm text-gray-600">
-            <thead class="bg-ghost-white border-b border-periwinkle/30 text-gray-700 uppercase tracking-wider font-semibold">
-                <tr class="hover:bg-gray-50 transition-colors">
-                    <th scope="col" class="px-6 py-4 w-20">No</th>
-                    <th scope="col" class="px-6 py-4">Nama Kategori</th>
-                    <th scope="col" class="px-6 py-4 text-center w-48">Aksi</th>
-                </tr>
-            </thead>
-            <tbody class="divide-y divide-gray-100">
-                @foreach ($kategori as $index => $item)
-                <tr class="hover:bg-gray-50 transition-colors">
-                    <td class="px-6 py-4">{{ $index + 1 }}</td>
-                    <td class="px-6 py-4 font-medium text-gray-800">{{ $item->nama_kategori }}</td>
-                    <td class="px-6 py-4 text-center">
-                        <div class="flex justify-center gap-2">
-                            <a href="{{ route('kategori.edit', $item->kategori_id) }}" class="px-3 py-1.5 text-xs font-medium text-soft-periwinkle border border-soft-periwinkle hover:bg-soft-periwinkle hover:text-white rounded transition-colors">
-                                Edit
-                            </a>
-                            <form action="{{ route('kategori.destroy', $item->kategori_id) }}" method="POST" class="inline">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" onclick="return confirm('Menghapus kategori dapat mempengaruhi data buku terkait. Lanjutkan?')" class="px-3 py-1.5 text-xs font-medium text-red-500 border border-red-500 hover:bg-red-500 hover:text-white rounded transition-colors">
-                                    Hapus
-                                </button>
-                            </form>
-                        </div>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
+<div class="bg-white rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-gray-100 overflow-hidden max-w-3xl">
+    <table class="w-full text-left text-sm">
+        <thead class="bg-[#F8F9FA] border-b border-gray-100 text-gray-500 uppercase tracking-widest font-bold text-[11px]">
+            <tr>
+                <th class="px-6 py-4 w-[10%]">No</th>
+                <th class="px-6 py-4">Nama Kategori</th>
+                <th class="px-6 py-4 text-center w-[25%]">Aksi</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-50">
+            @foreach ($kategori as $index => $item)
+            <tr class="hover:bg-gray-50/50 transition-colors">
+                <td class="px-6 py-5 font-bold text-gray-400">{{ $index + 1 }}</td>
+                <td class="px-6 py-5 font-bold text-gray-800">{{ $item->nama_kategori }}</td>
+                <td class="px-6 py-5 text-center">
+                    <div class="flex justify-center gap-2">
+                        <a href="{{ route('kategori.edit', $item->kategori_id) }}" class="p-2 bg-indigo-50 text-soft-periwinkle hover:bg-soft-periwinkle hover:text-white rounded-lg transition-all">
+                            <i class='bx bx-edit text-lg'></i>
+                        </a>
+                        <form action="{{ route('kategori.destroy', $item->kategori_id) }}" method="POST">
+                            @csrf @method('DELETE')
+                            <button type="submit" onclick="return confirm('Hapus kategori ini?')" class="p-2 bg-red-50 text-red-500 hover:bg-red-500 hover:text-white rounded-lg transition-all">
+                                <i class='bx bx-trash text-lg'></i>
+                            </button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
 </div>
 @endsection

@@ -1,64 +1,75 @@
 @extends('layouts.app')
-@section('title', 'Detail Transaksi Peminjaman - PerpusTech')
+@section('title', 'Detail Transaksi - PerpusTech')
 @section('content')
-<div class="mb-6 flex justify-between items-center">
+<div class="mb-8 flex justify-between items-center">
     <div>
-        <h1 class="text-3xl font-bold text-soft-periwinkle">Detail Peminjaman</h1>
-        <p class="text-gray-500 mt-1">Kode Transaksi: TRX-{{ $peminjaman->peminjaman_id }}</p>
+        <h1 class="text-3xl font-bold text-gray-800">Detail Peminjaman</h1>
+        <p class="text-gray-500 mt-1 flex items-center gap-2">
+            <i class='bx bx-barcode-reader'></i> Kode Transaksi: <span class="font-mono font-bold text-soft-periwinkle">TRX-{{ $peminjaman->peminjaman_id }}</span>
+        </p>
     </div>
-    <a href="/peminjaman" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium rounded-lg text-sm transition-colors">
-        Kembali ke Daftar
+    <a href="/peminjaman" class="px-5 py-2.5 bg-white border border-gray-200 hover:bg-gray-50 text-gray-700 font-bold rounded-xl text-sm transition-all flex items-center gap-2">
+        <i class='bx bx-arrow-back'></i> Kembali
     </a>
 </div>
 
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-    <div class="bg-white p-6 rounded-2xl border border-periwinkle/30 shadow-sm">
-        <h2 class="text-lg font-bold text-gray-800 mb-4 border-b pb-2">Informasi Peminjam</h2>
-        <div class="space-y-3 text-sm">
-            <p><span class="text-gray-400 block">Nama Anggota:</span> <strong class="text-gray-800 text-base">{{ $peminjaman->user->nama_user }}</strong></p>
-            <p><span class="text-gray-400 block">Email:</span> <span class="text-gray-700">{{ $peminjaman->user->email }}</span></p>
+    <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
+        <h2 class="text-sm font-bold text-gray-400 uppercase tracking-widest mb-4 flex items-center gap-2">
+            <i class='bx bx-user'></i> Informasi Peminjam
+        </h2>
+        <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-soft-periwinkle to-indigo-300 text-white flex items-center justify-center font-bold text-lg shadow-sm">
+                {{ substr($peminjaman->user->nama_user, 0, 1) }}
+            </div>
+            <div>
+                <strong class="block text-gray-800 text-lg">{{ $peminjaman->user->nama_user }}</strong>
+                <span class="text-gray-500 text-sm flex items-center gap-1"><i class='bx bx-envelope'></i> {{ $peminjaman->user->email }}</span>
+            </div>
         </div>
     </div>
 
-    <div class="bg-white p-6 rounded-2xl border border-periwinkle/30 shadow-sm">
-        <h2 class="text-lg font-bold text-gray-800 mb-4 border-b pb-2">Durasi & Status</h2>
-        <div class="grid grid-cols-2 gap-4 text-sm mb-4">
-            <div>
-                <span class="text-gray-400 block">Tanggal Pinjam</span>
-                <strong class="text-gray-700">{{ $peminjaman->tanggal_pinjam }}</strong>
+    <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
+        <h2 class="text-sm font-bold text-gray-400 uppercase tracking-widest mb-4 flex items-center gap-2">
+            <i class='bx bx-calendar-check'></i> Durasi & Status
+        </h2>
+        <div class="flex justify-between items-end">
+            <div class="space-y-3">
+                <div>
+                    <span class="text-xs text-gray-400 block font-bold">TANGGAL PINJAM</span>
+                    <strong class="text-gray-700">{{ $peminjaman->tanggal_pinjam }}</strong>
+                </div>
+                <div>
+                    <span class="text-xs text-gray-400 block font-bold">BATAS KEMBALI</span>
+                    <strong class="text-gray-700">{{ $peminjaman->batas_kembali }}</strong>
+                </div>
             </div>
-            <div>
-                <span class="text-gray-400 block">Batas Kembali</span>
-                <strong class="text-gray-700">{{ $peminjaman->batas_kembali }}</strong>
+            <div class="text-right">
+                <span class="text-xs text-gray-400 block font-bold">TOTAL DENDA</span>
+                <span class="text-2xl font-black text-red-500">Rp {{ number_format($peminjaman->detail->sum('denda'), 0, ',', '.') }}</span>
             </div>
-        </div>
-        <div class="pt-2 border-t border-gray-100 flex justify-between items-center">
-            <div>
-                <span class="text-gray-400 text-xs block">Total Denda</span>
-                <span class="text-xl font-bold text-red-500">Rp {{ number_format($peminjaman->detail->sum('denda'), 0, ',', '.') }}</span>
-            </div>
-            <span class="px-3 py-1 text-xs font-semibold rounded-full {{ $peminjaman->status == 'berjalan' ? 'bg-orange-50 text-orange-600' : 'bg-green-50 text-green-600' }}">
-                {{ strtoupper($peminjaman->status) }}
-            </span>
         </div>
     </div>
 
-    <div class="bg-white p-6 rounded-2xl border border-periwinkle/30 shadow-sm md:col-span-2">
-        <h2 class="text-lg font-bold text-gray-800 mb-4 border-b pb-2">Daftar Buku Yang Dipinjam</h2>
+    <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-[0_4px_20px_rgba(0,0,0,0.03)] md:col-span-2">
+        <h2 class="text-sm font-bold text-gray-400 uppercase tracking-widest mb-6 flex items-center gap-2">
+            <i class='bx bx-book-stack'></i> Daftar Buku Dipinjam
+        </h2>
         <div class="space-y-3">
             @foreach($peminjaman->detail as $det)
-                <div class="flex justify-between items-center text-sm text-gray-700 bg-ghost-white p-3 rounded-lg border border-gray-100">
-                    <div>
-                        <strong class="block text-gray-800">{{ $det->eksemplar->buku->judul }}</strong>
-                        <span class="text-xs text-gray-500">Barcode Fisik: {{ $det->eksemplar->kode_barcode }}</span>
+                <div class="flex justify-between items-center bg-gray-50 p-4 rounded-xl border border-gray-100">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-lg bg-white border flex items-center justify-center text-soft-periwinkle">
+                            <i class='bx bx-book'></i>
+                        </div>
+                        <div>
+                            <strong class="block text-gray-800 font-bold">{{ $det->eksemplar->buku->judul }}</strong>
+                            <span class="text-xs text-gray-400 font-medium tracking-wide">BARCODE: {{ $det->eksemplar->kode_barcode }}</span>
+                        </div>
                     </div>
-                    <div class="text-right">
-                        @if($det->tanggal_dikembalikan)
-                            <span class="text-xs text-green-600 font-medium block">Dikembalikan: {{ $det->tanggal_dikembalikan }}</span>
-                        @else
-                            <span class="text-xs text-orange-500 font-medium block">Belum Dikembalikan</span>
-                        @endif
-                    </div>
+                    <span class="px-3 py-1 rounded-lg text-xs font-bold {{ $det->tanggal_dikembalikan ? 'bg-green-50 text-green-600' : 'bg-orange-50 text-orange-500' }}">
+                        {{ $det->tanggal_dikembalikan ? 'Sudah Kembali' : 'Belum Kembali' }}
+                    </span>
                 </div>
             @endforeach
         </div>
