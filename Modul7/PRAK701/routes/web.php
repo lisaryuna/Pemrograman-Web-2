@@ -14,10 +14,15 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::middleware([RequireAuth::class])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    
-    Route::resource('buku', BukuController::class);
-    Route::resource('kategori', KategoriController::class);
+    Route::get('/buku', [BukuController::class, 'index'])->name('buku.index');
     Route::get('/riwayat-pinjam', [PeminjamanController::class, 'riwayat'])->name('riwayat.index');
-    Route::resource('peminjaman', PeminjamanController::class)->only(['index', 'create', 'store', 'show']);
-    Route::post('/peminjaman/{id}/kembalikan', [PeminjamanController::class, 'kembalikan'])->name('peminjaman.kembalikan');
+
+    Route::middleware(['admin'])->group(function () {
+        Route::resource('kategori', KategoriController::class);
+        Route::resource('buku', BukuController::class)->except(['index']);
+        Route::resource('peminjaman', PeminjamanController::class)->only(['index', 'create', 'store', 'show']);
+        Route::post('/peminjaman/{id}/kembalikan', [PeminjamanController::class, 'kembalikan'])->name('peminjaman.kembalikan');
+        Route::post('/peminjaman/{id}/bayar', [PeminjamanController::class, 'bayarDenda'])->name('peminjaman.bayar');
+        
+    });
 });
