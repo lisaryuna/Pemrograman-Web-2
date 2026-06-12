@@ -18,8 +18,11 @@ class Buku extends Model
         'tahun_terbit'
     ];
 
-    public function kategori()
-    {
+    public function kategori(){
         return $this->belongsTo(Kategori::class, 'kategori_id', 'kategori_id');
+    }
+
+    public function eksemplar() {
+        return $this->hasMany(EksemplarBuku::class, 'buku_id', 'buku_id');
     }
 }
