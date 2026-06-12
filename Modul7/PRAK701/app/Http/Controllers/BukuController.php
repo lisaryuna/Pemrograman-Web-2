@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Buku;
 use App\Models\Kategori;
+use app\Http\Requests\BukuRequest;
 use Illuminate\Http\Request;
 
 class BukuController extends Controller
@@ -28,19 +29,7 @@ class BukuController extends Controller
         return view('buku.create', compact('kategori'));
     }
 
-    public function store(Request $request) {
-        $request->validate([
-            'kategori_id' => 'required',
-            'judul' => 'required|string|max:255',
-            'penulis' => 'required|string|max:150',
-            'penerbit' => 'required|string|max:150',
-            'tahun_terbit' => 'required|integer|between:1800,2026'
-        ], [
-            'required' => 'Kolom :attribute wajib diisi.',
-            'tahun_terbit.between' => 'Tahun terbit tidak valid (1800 - 2026).',
-            'integer' => 'Kolom :attribute harus berupa angka.'
-        ]);
-
+    public function store(BukuRequest $request) {
         Buku::create($request->all());
         return redirect('/buku')->with('success', 'Data buku berhasil ditambahkan ke katalog.');
     }
@@ -51,19 +40,7 @@ class BukuController extends Controller
         return view('buku.edit', compact('buku', 'kategori'));
     }
 
-    public function update(Request $request, $id) {
-        $request->validate([
-            'kategori_id' => 'required',
-            'judul' => 'required|string|max:255',
-            'penulis' => 'required|string|max:150',
-            'penerbit' => 'required|string|max:150',
-            'tahun_terbit' => 'required|integer|between:1800,2026'
-        ], [
-            'required' => 'Kolom :attribute wajib diisi.',
-            'tahun_terbit.between' => 'Tahun terbit tidak valid (1800 - 2026).',
-            'integer' => 'Kolom :attribute harus berupa angka.'
-        ]);
-
+    public function update(BukuRequest $request, $id) {
         $buku = Buku::findOrFail($id);
         $buku->update($request->all());
         return redirect('/buku')->with('success', 'Data buku berhasil diperbarui.');
