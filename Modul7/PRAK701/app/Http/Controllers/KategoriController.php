@@ -47,8 +47,13 @@ class KategoriController extends Controller
     }
 
     public function destroy($id) {
+    try {
         $kategori = Kategori::findOrFail($id);
         $kategori->delete();
+        
         return redirect('/kategori')->with('success', 'Kategori berhasil dihapus.');
+    } catch (\Illuminate\Database\QueryException $e) {
+        return redirect('/kategori')->with('error', 'Gagal dihapus: Kategori ini masih digunakan oleh buku.');
     }
+}
 }

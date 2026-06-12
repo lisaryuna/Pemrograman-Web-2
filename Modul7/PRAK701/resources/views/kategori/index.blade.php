@@ -17,6 +17,12 @@
 </div>
 @endif
 
+@if(session('error'))
+<div class="mb-6 p-4 bg-red-50 border border-red-200 text-red-600 rounded-xl text-sm flex items-center gap-2">
+    <i class='bx bx-error-circle text-lg'></i> {{ session('error') }}
+</div>
+@endif
+
 <div class="bg-white rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-gray-100 overflow-hidden max-w-3xl">
     <table class="w-full text-left text-sm">
         <thead class="bg-[#F8F9FA] border-b border-gray-100 text-gray-500 uppercase tracking-widest font-bold text-[11px]">
