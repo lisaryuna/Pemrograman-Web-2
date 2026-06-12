@@ -16,15 +16,15 @@ class UserController extends Controller
     public function store(Request $request) {
         $request->validate([
             'name' => 'required',
-            'email' => 'required|email|unique:users',
+            'email' => 'required|email|unique:user,email',
             'password' => 'required|min:6',
             'peran' => 'required'
         ]);
 
         User::create([
-            'name' => $request->name,
+            'nama_user' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'kata_sandi' => Hash::make($request->password),
             'peran' => $request->peran
         ]);
 

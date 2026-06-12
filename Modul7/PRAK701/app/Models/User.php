@@ -26,6 +26,11 @@ class User extends Authenticatable
         'peran'
     ];
 
+    protected $hidden = [
+        'kata_sandi',
+        'remember_token',
+    ];
+
     public function getAuthPassword() {
         return $this->kata_sandi;
     }
