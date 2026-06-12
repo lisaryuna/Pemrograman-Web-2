@@ -7,13 +7,13 @@
     @vite('resources/css/app.css')
 </head>
 <body class="bg-ghost-white font-sans text-gray-800 antialiased">
-    <div class="min-h-screen flex">
-        <aside class="w-64 bg-white border-r border-periwinkle/30 flex flex-col shadow-sm">
+    <div class="h-screen flex overflow-hidden">
+        <aside class="w-64 bg-white border-r border-periwinkle/30 flex flex-col shadow-s flex-shrink-0">
             <div class="p-6 border-b border-periwinkle/30">
                 <h2 class="text-2xl font-bold text-soft-periwinkle tracking-wide">PerpusTech</h2>
             </div>
 
-            <nav class="flex-1 p-4 space-y-4">
+            <nav class="flex-1 p-4 space-y-4 overflow-y-auto">
                 <a href="/dashboard" class="block px-4 py-2.5 rounded-lg font-medium transition-all {{ request()->is('dashboard') ? 'bg-soft-periwinkle text-white shadow-md' : 'text-gray-600 hover:bg-antique-white hover:text-soft-periwinkle' }}">
                     Dashboard
                 </a>
@@ -49,8 +49,8 @@
             </div>
         </aside>
 
-        <main class="flex-1 flex flex-col">
-            <header class="bg-white border-b border-periwinkle/30 p-4 flex justify-end items-center shadow-sm h-[73px]">
+        <main class="flex-1 flex flex-col overflow-y-auto">
+            <header class="bg-white border-b border-periwinkle/30 p-4 flex justify-end items-center shadow-sm h-[73px] sticky top-0 z-10">
                 <div class="flex items-center gap-3">
                     <div class="w-8 h-8 rounded-full bg-peach-fuzz text-soft-periwinkle flex items-center justify-center font-bold uppercase">
                         {{ substr(auth()->user()->nama_user, 0, 1) }}
