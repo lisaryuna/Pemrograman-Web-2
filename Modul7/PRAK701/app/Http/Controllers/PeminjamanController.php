@@ -6,6 +6,7 @@ use App\Models\Peminjaman;
 use App\Models\DetailPeminjaman;
 use App\Models\EksemplarBuku;
 use App\Models\User;
+use App\Http\Requests\PeminjamanRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -24,14 +25,7 @@ class PeminjamanController extends Controller
         return view('peminjaman.create', compact('user', 'eksemplar'));
     }
 
-    public function store(Request $request) {
-        $request->validate([
-            'user_id' => 'required',
-            'eksemplar_id' => 'required', 
-            'tanggal_pinjam' => 'required|date',
-            'batas_kembali' => 'required|date|after_or_equal:tanggal_pinjam',
-        ]);
-
+    public function store(PeminjamanRequest $request) {
         try {
             DB::transaction(function () use ($request) {
                 $eksemplar = EksemplarBuku::where('eksemplar_id', $request->eksemplar_id)
