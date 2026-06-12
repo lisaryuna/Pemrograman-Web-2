@@ -63,6 +63,7 @@
                     <td class="px-6 py-5 font-medium text-gray-600">{{ $item->penulis }}</td>
                     <td class="px-6 py-5 font-medium text-gray-600">{{ $item->penerbit }}</td>
                     <td class="px-6 py-5 font-medium text-gray-600">{{ $item->tahun_terbit }}</td>
+                    
                     <td class="px-6 py-5 text-center">
                         @if($item->stok_tersedia > 0)
                             <span class="inline-flex items-center px-2.5 py-1 text-[11px] font-bold rounded-lg bg-green-50 text-green-600 border border-green-100 whitespace-nowrap">
@@ -74,6 +75,7 @@
                             </span>
                         @endif
                     </td>
+                    
                     <td class="px-6 py-5 text-center">
                         @if($item->stok_tersedia > 0)
                             <div class="flex flex-col items-center gap-1.5">
@@ -95,15 +97,22 @@
                     @if(auth()->check() && auth()->user()->peran === 'admin')
                     <td class="px-6 py-5 text-center">
                         <div class="flex justify-center gap-2">
+                            
+                            <a href="{{ route('eksemplar.index', $item->buku_id) }}" class="p-2 bg-emerald-50 text-emerald-600 hover:bg-emerald-500 hover:text-white rounded-lg transition-all" title="Kelola Fisik Buku">
+                                <i class='bx bx-barcode-reader text-lg'></i>
+                            </a>
+
                             <a href="{{ route('buku.edit', $item->buku_id) }}" class="p-2 bg-indigo-50 text-soft-periwinkle hover:bg-soft-periwinkle hover:text-white rounded-lg transition-all">
                                 <i class='bx bx-edit text-lg'></i>
                             </a>
+                            
                             <form action="{{ route('buku.destroy', $item->buku_id) }}" method="POST">
                                 @csrf @method('DELETE')
                                 <button type="submit" onclick="return confirm('Hapus buku ini?')" class="p-2 bg-red-50 text-red-500 hover:bg-red-500 hover:text-white rounded-lg transition-all">
                                     <i class='bx bx-trash text-lg'></i>
                                 </button>
                             </form>
+
                         </div>
                     </td>
                     @endif

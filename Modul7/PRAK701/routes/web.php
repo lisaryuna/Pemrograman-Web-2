@@ -23,6 +23,10 @@ Route::middleware([RequireAuth::class])->group(function () {
         Route::resource('peminjaman', PeminjamanController::class)->only(['index', 'create', 'store', 'show']);
         Route::post('/peminjaman/{id}/kembalikan', [PeminjamanController::class, 'kembalikan'])->name('peminjaman.kembalikan');
         Route::post('/peminjaman/{id}/bayar', [PeminjamanController::class, 'bayarDenda'])->name('peminjaman.bayar');
-        
+        Route::get('/buku/{buku_id}/eksemplar', [App\Http\Controllers\EksemplarController::class, 'index'])->name('eksemplar.index');
+        Route::post('/buku/{buku_id}/eksemplar', [App\Http\Controllers\EksemplarController::class, 'store'])->name('eksemplar.store');
+        Route::put('/eksemplar/{id}', [App\Http\Controllers\EksemplarController::class, 'update'])->name('eksemplar.update');
+        Route::delete('/eksemplar/{id}', [App\Http\Controllers\EksemplarController::class, 'destroy'])->name('eksemplar.destroy');
+        Route::get('/laporan/stok', [App\Http\Controllers\LaporanController::class, 'stok'])->name('laporan.stok');
     });
 });

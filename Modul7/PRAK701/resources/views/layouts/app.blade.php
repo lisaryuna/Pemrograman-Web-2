@@ -45,6 +45,11 @@
                         <i class='bx bx-transfer text-xl transition-colors {{ request()->is('peminjaman*') ? 'text-white' : 'text-gray-400 group-hover:text-soft-periwinkle' }}'></i>
                         Sirkulasi Admin
                     </a>
+
+                    <a href="/laporan/stok" class="group flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-all duration-200 {{ request()->is('laporan/stok') ? 'bg-soft-periwinkle text-white shadow-md shadow-soft-periwinkle/30' : 'text-gray-500 hover:bg-gray-50 hover:text-soft-periwinkle' }}">
+                        <i class='bx bx-history text-xl transition-colors {{ request()->is('laporan/stok') ? 'text-white' : 'text-gray-400 group-hover:text-soft-periwinkle' }}'></i>
+                        Laporan Stok
+                    </a>
                 @endif
                 
                 @if(auth()->check() && auth()->user()->peran === 'anggota')
