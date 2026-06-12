@@ -45,14 +45,27 @@
                     <td class="px-6 py-4 font-bold text-red-500">Rp {{ number_format($item->detail->sum('denda'), 0, ',', '.') }}</td>
                     <td class="px-6 py-4 text-center">
                         @if($item->status == 'berjalan')
-                        <form action="{{ route('peminjaman.kembalikan', $item->peminjaman_id) }}" method="POST">
-                            @csrf
-                            <button type="submit" onclick="return confirm('Proses pengembalian buku?')" class="flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-white bg-soft-periwinkle hover:bg-indigo-600 rounded-lg transition-all mx-auto">
-                                <i class='bx bx-check-circle'></i> Selesaikan
-                            </button>
-                        </form>
+                            <form action="{{ route('peminjaman.kembalikan', $item->peminjaman_id) }}" method="POST">
+                                @csrf
+                                <button type="submit" onclick="return confirm('Proses pengembalian buku?')" class="flex items-center justify-center gap-1.5 px-3 py-1.5 text-[11px] font-bold text-white bg-soft-periwinkle hover:bg-indigo-600 rounded-lg transition-all mx-auto w-full">
+                                    <i class='bx bx-check-circle text-sm'></i> Selesaikan
+                                </button>
+                            </form>
                         @else
-                        <span class="text-[11px] font-bold text-gray-300">SELESAI</span>
+                            @php 
+                                $adaDendaBelumLunas = $item->detail->where('status_denda', 'belum_dibayar')->first(); 
+                            @endphp
+
+                            @if($adaDendaBelumLunas)
+                                <form action="{{ route('peminjaman.bayar', $adaDendaBelumLunas->detail_peminjaman_id) }}" method="POST">
+                                    @csrf
+                                    <button type="submit" onclick="return confirm('Konfirmasi pembayaran denda untuk transaksi ini?')" class="flex items-center justify-center gap-1.5 px-3 py-1.5 text-[11px] font-bold text-white bg-red-500 hover:bg-red-600 rounded-lg transition-all mx-auto w-full">
+                                        <i class='bx bx-money text-sm'></i> Bayar Denda
+                                    </button>
+                                </form>
+                            @else
+                                <span class="text-[11px] font-bold text-gray-300 tracking-wide">SELESAI</span>
+                            @endif
                         @endif
                     </td>
                 </tr>

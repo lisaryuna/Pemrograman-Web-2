@@ -49,6 +49,7 @@
                     <th class="px-6 py-4">Penerbit</th>
                     <th class="px-6 py-4">Tahun</th>
                     <th class="px-6 py-4 text-center">Stok</th>
+                    <th class="px-6 py-4 text-center">Kondisi Fisik</th>
                     @if(auth()->check() && auth()->user()->peran === 'admin')
                         <th class="px-6 py-4 text-center">Aksi</th>
                     @endif
@@ -71,6 +72,23 @@
                             <span class="inline-flex items-center px-2.5 py-1 text-[11px] font-bold rounded-lg bg-red-50 text-red-500 border border-red-100 whitespace-nowrap">
                                 Habis
                             </span>
+                        @endif
+                    </td>
+                    <td class="px-6 py-5 text-center">
+                        @if($item->stok_tersedia > 0)
+                            <div class="flex flex-col items-center gap-1.5">
+                                @php 
+                                    $kondisi_grup = $item->eksemplar->where('status', 'tersedia')->countBy('kondisi');
+                                @endphp
+                                @foreach($kondisi_grup as $kondisi => $jumlah)
+                                    <span class="inline-flex items-center px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider rounded-md border whitespace-nowrap
+                                        {{ $kondisi == 'baik' ? 'bg-blue-50 text-blue-600 border-blue-200' : ($kondisi == 'rusak_ringan' ? 'bg-orange-50 text-orange-600 border-orange-200' : 'bg-red-50 text-red-600 border-red-200') }}">
+                                        {{ str_replace('_', ' ', $kondisi) }}: {{ $jumlah }}
+                                    </span>
+                                @endforeach
+                            </div>
+                        @else
+                            <span class="text-[11px] font-bold text-gray-300">-</span>
                         @endif
                     </td>
                     
