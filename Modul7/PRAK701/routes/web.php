@@ -28,5 +28,7 @@ Route::middleware([RequireAuth::class])->group(function () {
         Route::put('/eksemplar/{id}', [App\Http\Controllers\EksemplarController::class, 'update'])->name('eksemplar.update');
         Route::delete('/eksemplar/{id}', [App\Http\Controllers\EksemplarController::class, 'destroy'])->name('eksemplar.destroy');
         Route::get('/laporan/stok', [App\Http\Controllers\LaporanController::class, 'stok'])->name('laporan.stok');
+        Route::get('/user', [App\Http\Controllers\UserController::class, 'index'])->name('user.index');
+Route::post('/user', [App\Http\Controllers\UserController::class, 'store'])->name('user.store');
     });
 });
