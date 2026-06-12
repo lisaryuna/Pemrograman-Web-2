@@ -43,9 +43,10 @@
                     <th scope="col" class="px-6 py-4">Penulis</th>
                     <th scope="col" class="px-6 py-4">Penerbit</th>
                     <th scope="col" class="px-6 py-4">Tahun Terbit</th>
+                    <th scope="col" class="px-6 py-4 text-center">Stok Tersedia</th>
                     
                     @if(auth()->check() && auth()->user()->peran === 'admin')
-                        <th scope="col" class="px-6 py-4">Aksi</th>
+                        <th scope="col" class="px-6 py-4 text-center">Aksi</th>
                     @endif
                 </tr>
             </thead>
@@ -56,7 +57,18 @@
                     <td class="px-6 py-4 font-medium text-gray-800">{{ $item->judul }}</td>
                     <td class="px-6 py-4">{{ $item->penulis }}</td>
                     <td class="px-6 py-4">{{ $item->penerbit }}</td>
-                    <td class="px-6 py-4">{{ $item->tahun_terbit }}</td>                        
+                    <td class="px-6 py-4">{{ $item->tahun_terbit }}</td>    
+                    <td class="px-6 py-4 text-center">
+                        @if($item->stok_tersedia > 0)
+                            <span class="px-2.5 py-1 text-xs font-semibold rounded-full bg-green-50 text-green-600 border border-green-200">
+                                {{ $item->stok_tersedia }} Unit
+                            </span>
+                        @else
+                            <span class="px-2.5 py-1 text-xs font-semibold rounded-full bg-red-50 text-red-500 border border-red-200">
+                                Habis
+                            </span>
+                        @endif
+                    </td>
                     
                     @if(auth()->check() && auth()->user()->peran === 'admin')
                     <td class="px-6 py-4 text-center">
