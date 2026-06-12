@@ -3,9 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Buku extends Model
-{
+class Buku extends Model {
+    use SoftDeletes;
     protected $table ='buku';
     protected $primaryKey = 'buku_id';
     public $timestamps = false;

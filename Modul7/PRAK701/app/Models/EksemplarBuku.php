@@ -13,6 +13,6 @@ class EksemplarBuku extends Model
     protected $fillable = ['buku_id', 'kode_barcode', 'kondisi', 'status'];
 
     public function buku() {
-        return $this->belongsTo(Buku::class, 'buku_id', 'buku_id');
+        return $this->belongsTo(Buku::class, 'buku_id')->withTrashed();
     }
 }

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->string('penulis', 150);
             $table->string('penerbit', 150);
             $table->smallInteger('tahun_terbit');
+            $table->softDeletes();
         });
     }
 
