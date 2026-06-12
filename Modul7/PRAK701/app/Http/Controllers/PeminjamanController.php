@@ -14,26 +14,17 @@ use Illuminate\Support\Facades\Auth;
 class PeminjamanController extends Controller
 {
     public function index() {
-        if (Auth::user()->peran !== 'admin') {
-            abort(403, 'Akses Ditolak: Hanya Admin yang boleh membuka halaman sirkulasi.');
-        }
         $peminjaman = Peminjaman::with(['user', 'detail'])->get();
         return view('peminjaman.index', compact('peminjaman'));
     }
 
     public function create() {
-        if (Auth::user()->peran !== 'admin') {
-            abort(403, 'Akses Ditolak: Hanya Admin yang boleh mencatat peminjaman baru.');
-        }
         $user = User::all();
         $eksemplar = EksemplarBuku::with('buku')->where('status', 'tersedia')->get();
         return view('peminjaman.create', compact('user', 'eksemplar'));
     }
 
     public function store(Request $request) {
-        if (Auth::user()->peran !== 'admin') {
-            abort(403, 'Akses Ditolak: Hanya Admin yang boleh menyimpan transaksi peminjaman.');
-        }
         $request->validate([
             'user_id' => 'required',
             'eksemplar_id' => 'required', 
@@ -41,32 +32,40 @@ class PeminjamanController extends Controller
             'batas_kembali' => 'required|date|after_or_equal:tanggal_pinjam',
         ]);
 
-        DB::transaction(function () use ($request) {
-            $peminjaman = Peminjaman::create([
-                'user_id' => $request->user_id,
-                'tanggal_pinjam' => $request->tanggal_pinjam,
-                'batas_kembali' => $request->batas_kembali,
-                'status' => 'berjalan'
-            ]);
+        try {
+            DB::transaction(function () use ($request) {
+                $eksemplar = EksemplarBuku::where('eksemplar_id', $request->eksemplar_id)
+                    ->where('status', 'tersedia')
+                    ->lockForUpdate()
+                    ->first();
 
-            DetailPeminjaman::create([
-                'peminjaman_id' => $peminjaman->peminjaman_id,
-                'eksemplar_id' => $request->eksemplar_id,
-                'denda' => 0,
-                'status_denda' => 'nihil'
-            ]);
+                if (!$eksemplar) {
+                    throw new \Exception("Maaf, buku ini baru saja dipinjam atau stok fisik tidak tersedia saat ini.");
+                }
+                
+                $peminjaman = Peminjaman::create([
+                    'user_id' => $request->user_id,
+                    'tanggal_pinjam' => $request->tanggal_pinjam,
+                    'batas_kembali' => $request->batas_kembali,
+                    'status' => 'berjalan'
+                ]);
 
-            EksemplarBuku::where('eksemplar_id', $request->eksemplar_id)
-                ->update(['status' => 'dipinjam']);
-        });
+                DetailPeminjaman::create([
+                    'peminjaman_id' => $peminjaman->peminjaman_id,
+                    'eksemplar_id' => $request->eksemplar_id,
+                    'denda' => 0,
+                    'status_denda' => 'nihil'
+                ]);
 
-        return redirect('/peminjaman')->with('success', 'Sirkulasi peminjaman baru berhasil dicatat.');
+                $eksemplar->update(['status' => 'dipinjam']);
+            });
+            return redirect('/peminjaman')->with('success', 'Sirkulasi peminjaman baru berhasil dicatat.');
+        } catch (\Exception $e) {
+            return back()->withInput()->with('error', $e->getMessage());
+        }
     }
 
     public function kembalikan($id) {
-        if (Auth::user()->peran !== 'admin') {
-            abort(403, 'Akses Ditolak: Hanya Admin yang berhak memproses pengembalian buku.');
-        }
         $peminjaman = Peminjaman::with('detail')->findOrFail($id);
         $tanggalKembali = Carbon::now();
         $batasKembali = Carbon::parse($peminjaman->batas_kembali);
@@ -95,9 +94,6 @@ class PeminjamanController extends Controller
     }
 
     public function show($id){
-        if (Auth::user()->peran !== 'admin') {
-            abort(403, 'Akses Ditolak: Hanya Admin yang boleh melihat detail nota transaksi ini.');
-        }
         $peminjaman = Peminjaman::with(['user', 'detail.eksemplar.buku'])->findOrFail($id);
         return view('peminjaman.show', compact('peminjaman'));
     }
@@ -109,5 +105,12 @@ class PeminjamanController extends Controller
             ->get();
             
         return view('peminjaman.riwayat', compact('peminjaman'));
+    }
+
+    public function bayarDenda($detail_id) {  
+        $detail = DetailPeminjaman::findOrFail($detail_id);
+        $detail->update(['status_denda' => 'lunas']);
+        
+        return back()->with('success', 'Pembayaran denda berhasil dikonfirmasi.');
     }
 }
