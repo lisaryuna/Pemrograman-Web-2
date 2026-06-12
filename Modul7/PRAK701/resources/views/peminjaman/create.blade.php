@@ -17,24 +17,34 @@
 
         <div class="space-y-2">
             <label for="user_id" class="text-xs font-bold text-gray-400 uppercase tracking-widest ml-1">Nama Anggota / Peminjam</label>
-            <select id="user_id" name="user_id" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-soft-periwinkle/20 focus:border-soft-periwinkle transition-all" required>
-                <option value="">Pilih Anggota</option>
-                @foreach($user as $u)
-                    <option value="{{ $u->user_id }}">{{ $u->nama_user }} (ID: {{ $u->user_id }})</option>
-                @endforeach
-            </select>
+            <div class="relative">
+                <select id="user_id" name="user_id" class="appearance-none w-full pl-4 pr-10 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-soft-periwinkle/20 focus:border-soft-periwinkle transition-all cursor-pointer" required>
+                    <option value="">Pilih Anggota</option>
+                    @foreach($user as $u)
+                        <option value="{{ $u->user_id }}">{{ $u->nama_user }} (ID: {{ $u->user_id }})</option>
+                    @endforeach
+                </select>
+                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-4 text-gray-400">
+                    <i class='bx bx-chevron-down text-xl'></i>
+                </div>
+            </div>
         </div>
 
         <div class="space-y-2">
             <label for="eksemplar_id" class="text-xs font-bold text-gray-400 uppercase tracking-widest ml-1">Pilih Buku (Barcode)</label>
-            <select id="eksemplar_id" name="eksemplar_id" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-soft-periwinkle/20 focus:border-soft-periwinkle transition-all" required>
-                <option value="">Pilih Buku yang Tersedia</option>
-                @foreach($eksemplar as $eks)
-                    <option value="{{ $eks->eksemplar_id }}">
-                        {{ $eks->kode_barcode }} — {{ $eks->buku->judul }}
-                    </option>
-                @endforeach
-            </select>
+            <div class="relative">
+                <select id="eksemplar_id" name="eksemplar_id" class="appearance-none w-full pl-4 pr-10 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-soft-periwinkle/20 focus:border-soft-periwinkle transition-all cursor-pointer" required>
+                    <option value="">Pilih Buku yang Tersedia</option>
+                    @foreach($eksemplar as $eks)
+                        <option value="{{ $eks->eksemplar_id }}">
+                            {{ $eks->kode_barcode }} — {{ $eks->buku->judul }}
+                        </option>
+                    @endforeach
+                </select>
+                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-4 text-gray-400">
+                    <i class='bx bx-chevron-down text-xl'></i>
+                </div>
+            </div>
             @if($eksemplar->isEmpty())
                 <p class="text-red-500 text-xs font-bold mt-1 flex items-center gap-1">
                     <i class='bx bx-error-circle'></i> Tidak ada fisik buku yang tersedia di rak saat ini.

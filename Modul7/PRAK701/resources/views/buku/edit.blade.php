@@ -18,15 +18,20 @@
 
         <div class="space-y-2">
             <label for="kategori_id" class="text-xs font-bold text-gray-400 uppercase tracking-widest ml-1">Kategori</label>
-            <select id="kategori_id" name="kategori_id" 
-                class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-soft-periwinkle/20 focus:border-soft-periwinkle transition-all @error('kategori_id') border-red-400 @enderror">
-                <option value="">Pilih Kategori</option>
-                @foreach($kategori as $kat)
-                    <option value="{{ $kat->kategori_id }}" {{ old('kategori_id', $buku->kategori_id) == $kat->kategori_id ? 'selected' : '' }}>
-                        {{ $kat->nama_kategori }}
-                    </option>
-                @endforeach
-            </select>
+            <div class="relative">
+                <select id="kategori_id" name="kategori_id" 
+                    class="appearance-none w-full pl-4 pr-10 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-soft-periwinkle/20 focus:border-soft-periwinkle transition-all cursor-pointer @error('kategori_id') border-red-400 @enderror">
+                    <option value="">Pilih Kategori</option>
+                    @foreach($kategori as $kat)
+                        <option value="{{ $kat->kategori_id }}" {{ old('kategori_id', $buku->kategori_id) == $kat->kategori_id ? 'selected' : '' }}>
+                            {{ $kat->nama_kategori }}
+                        </option>
+                    @endforeach
+                </select>
+                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-4 text-gray-400">
+                    <i class='bx bx-chevron-down text-xl'></i>
+                </div>
+            </div>
             @error('kategori_id') <p class="text-red-500 text-xs font-bold">{{ $message }}</p> @enderror
         </div>
 

@@ -14,14 +14,19 @@
 
     <div class="flex items-center gap-3">
         <form action="{{ route('buku.index') }}" method="GET" class="flex items-center">
-            <select name="kategori_id" onchange="this.form.submit()" class="px-4 py-2.5 bg-white border border-gray-200 rounded-xl text-sm text-gray-700 focus:ring-2 focus:ring-soft-periwinkle focus:border-soft-periwinkle outline-none transition-all cursor-pointer">
-                <option value="">Semua Kategori</option>
-                @foreach($kategori as $kat)
-                <option value="{{ $kat->kategori_id }}" {{ request('kategori_id') == $kat->kategori_id ? 'selected' : '' }}>
-                    {{ $kat->nama_kategori }}
-                </option>
-                @endforeach
-            </select>
+            <div class="relative">
+                <select name="kategori_id" onchange="this.form.submit()" class="appearance-none pl-4 pr-10 py-2.5 bg-white border border-gray-200 rounded-xl text-sm text-gray-700 focus:ring-2 focus:ring-soft-periwinkle focus:border-soft-periwinkle outline-none transition-all cursor-pointer">
+                    <option value="">Semua Kategori</option>
+                    @foreach($kategori as $kat)
+                    <option value="{{ $kat->kategori_id }}" {{ request('kategori_id') == $kat->kategori_id ? 'selected' : '' }}>
+                        {{ $kat->nama_kategori }}
+                    </option>
+                    @endforeach
+                </select>
+                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400">
+                    <i class='bx bx-chevron-down text-xl'></i>
+                </div>
+            </div>
         </form>
 
         @if(auth()->check() && auth()->user()->peran === 'admin')

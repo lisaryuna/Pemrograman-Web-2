@@ -58,19 +58,29 @@
                     <form action="{{ route('eksemplar.update', $eks->eksemplar_id) }}" method="POST">
                         @csrf @method('PUT')
                         <td class="px-6 py-4">
-                            <select name="kondisi" class="bg-gray-50 border border-gray-200 rounded-lg text-xs p-1.5 outline-none font-bold">
-                                <option value="baik" {{ $eks->kondisi == 'baik' ? 'selected' : '' }}>Baik</option>
-                                <option value="rusak_ringan" {{ $eks->kondisi == 'rusak_ringan' ? 'selected' : '' }}>Rusak Ringan</option>
-                                <option value="rusak_berat" {{ $eks->kondisi == 'rusak_berat' ? 'selected' : '' }}>Rusak Berat</option>
-                            </select>
+                            <div class="relative w-fit">
+                                <select name="kondisi" class="appearance-none bg-gray-50 border border-gray-200 rounded-lg text-xs pl-2 pr-7 py-1.5 outline-none font-bold cursor-pointer transition-colors focus:border-soft-periwinkle focus:ring-1 focus:ring-soft-periwinkle">
+                                    <option value="baik" {{ $eks->kondisi == 'baik' ? 'selected' : '' }}>Baik</option>
+                                    <option value="rusak_ringan" {{ $eks->kondisi == 'rusak_ringan' ? 'selected' : '' }}>Rusak Ringan</option>
+                                    <option value="rusak_berat" {{ $eks->kondisi == 'rusak_berat' ? 'selected' : '' }}>Rusak Berat</option>
+                                </select>
+                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2 text-gray-400">
+                                    <i class='bx bx-chevron-down text-sm'></i>
+                                </div>
+                            </div>
                         </td>
                         <td class="px-6 py-4">
-                            <select name="status" class="bg-gray-50 border border-gray-200 rounded-lg text-xs p-1.5 outline-none font-bold">
-                                <option value="tersedia" {{ $eks->status == 'tersedia' ? 'selected' : '' }}>Tersedia</option>
-                                <option value="dipinjam" {{ $eks->status == 'dipinjam' ? 'selected' : '' }}>Dipinjam</option>
-                                <option value="diperbaiki" {{ $eks->status == 'diperbaiki' ? 'selected' : '' }}>Diperbaiki</option>
-                                <option value="hilang" {{ $eks->status == 'hilang' ? 'selected' : '' }}>Hilang</option>
-                            </select>
+                            <div class="relative w-fit">
+                                <select name="status" class="appearance-none bg-gray-50 border border-gray-200 rounded-lg text-xs pl-2 pr-7 py-1.5 outline-none font-bold cursor-pointer transition-colors focus:border-soft-periwinkle focus:ring-1 focus:ring-soft-periwinkle">
+                                    <option value="tersedia" {{ $eks->status == 'tersedia' ? 'selected' : '' }}>Tersedia</option>
+                                    <option value="dipinjam" {{ $eks->status == 'dipinjam' ? 'selected' : '' }}>Dipinjam</option>
+                                    <option value="diperbaiki" {{ $eks->status == 'diperbaiki' ? 'selected' : '' }}>Diperbaiki</option>
+                                    <option value="hilang" {{ $eks->status == 'hilang' ? 'selected' : '' }}>Hilang</option>
+                                </select>
+                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2 text-gray-400">
+                                    <i class='bx bx-chevron-down text-sm'></i>
+                                </div>
+                            </div>
                         </td>
                         <td class="px-6 py-4 text-center">
                             <div class="flex items-center justify-center gap-1.5">
