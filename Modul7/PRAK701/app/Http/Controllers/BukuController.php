@@ -9,7 +9,10 @@ use Illuminate\Http\Request;
 class BukuController extends Controller
 {
     public function index(Request $request) {
-        $query = Buku::with('kategori');
+        $query = Buku::with('kategori')
+            ->withCount(['eksemplar as stok_tersedia' => function ($q) {
+                $q->where('status', 'tersedia');
+            }]);
 
         if ($request->has('kategori_id') && $request->kategori_id != '') {
             $query->where('kategori_id', $request->kategori_id);
