@@ -7,11 +7,24 @@
         <p class="text-gray-500 mt-1">Daftar koleksi buku perpustakaan.</p>
     </div>
 
+    <div class="flex items-center gap-3">
+        <form action="{{ route('buku.index') }}" method="GET" class="flex items-center">
+            <select name="kategori_id" onchange="this.form.submit()" class="px-4 py-2.5 bg-white border border-periwinkle/50 rounded-lg text-sm text-gray-700 focus:ring-2 focus:ring-soft-periwinkle focus:outline-none cursor-pointer">
+                <option value="">Semua Kategori</option>
+                @foreach($kategori as $kat)
+                <option value="{{ $kat->kategori_id }}" {{ request('kategori_id') == $kat->kategori_id ? 'selected' : '' }}>
+                    {{ $kat->nama_kategori }}
+                </option>
+            @endforeach
+        </select>
+    </form>
+
     @if(auth()->check() && auth()->user()->peran === 'admin')
     <a href="/buku/create" class="px-5 py-2.5 bg-soft-periwinkle hover:bg-periwinkle text-white rounded-lg font-medium shadow-md">
         + Tambah Buku Baru
     </a>
     @endif
+    </div>
 </div>
 
 @if(session('success'))

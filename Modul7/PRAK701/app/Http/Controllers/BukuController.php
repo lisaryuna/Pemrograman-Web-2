@@ -8,9 +8,16 @@ use Illuminate\Http\Request;
 
 class BukuController extends Controller
 {
-    public function index() {
-        $buku = Buku::with('kategori')->get();
-        return view('buku.index', compact('buku'));
+    public function index(Request $request) {
+        $query = Buku::with('kategori');
+
+        if ($request->has('kategori_id') && $request->kategori_id != '') {
+            $query->where('kategori_id', $request->kategori_id);
+        }
+
+        $buku = $query->get();
+        $kategori = Kategori::all();
+        return view('buku.index', compact('buku', 'kategori'));
     }
 
     public function create() {
