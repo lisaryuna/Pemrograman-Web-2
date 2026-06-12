@@ -9,9 +9,7 @@
 </head>
 <body class="bg-[#F8F9FA] font-sans text-gray-800 antialiased selection:bg-soft-periwinkle selection:text-white">
     <div class="h-screen flex overflow-hidden">
-        
         <aside class="w-72 bg-white border-r border-gray-100 flex flex-col shadow-[4px_0_24px_rgba(0,0,0,0.02)] flex-shrink-0 z-20">
-            
             <div class="h-[76px] px-6 border-b border-gray-100 flex items-center gap-3 flex-shrink-0">
                 <div class="w-10 h-10 bg-gradient-to-br from-soft-periwinkle to-periwinkle rounded-xl flex items-center justify-center text-white shadow-lg shadow-soft-periwinkle/30">
                     <i class='bx bx-book-reader text-2xl'></i>
@@ -20,9 +18,7 @@
             </div>
 
             <nav class="flex-1 p-4 space-y-1.5 overflow-y-auto">
-                
                 <p class="px-4 text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-3 mt-2">Menu Utama</p>
-                
                 <a href="/dashboard" class="group flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-all duration-200 {{ request()->is('dashboard') ? 'bg-soft-periwinkle text-white shadow-md shadow-soft-periwinkle/30' : 'text-gray-500 hover:bg-gray-50 hover:text-soft-periwinkle' }}">
                     <i class='bx bxs-dashboard text-xl transition-colors {{ request()->is('dashboard') ? 'text-white' : 'text-gray-400 group-hover:text-soft-periwinkle' }}'></i>
                     Dashboard
@@ -33,9 +29,8 @@
                     Katalog Buku
                 </a>
 
-                @if(auth()->check() && auth()->user()->peran === 'admin')
+                @can('admin')
                     <p class="px-4 text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-3 mt-6">Administrator</p>
-                    
                     <a href="/kategori" class="group flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-all duration-200 {{ request()->is('kategori*') ? 'bg-soft-periwinkle text-white shadow-md shadow-soft-periwinkle/30' : 'text-gray-500 hover:bg-gray-50 hover:text-soft-periwinkle' }}">
                         <i class='bx bx-category text-xl transition-colors {{ request()->is('kategori*') ? 'text-white' : 'text-gray-400 group-hover:text-soft-periwinkle' }}'></i>
                         Kategori Buku
@@ -55,16 +50,15 @@
                         <i class='bx bx-user-plus text-xl transition-colors {{ request()->is('user*') ? 'text-white' : 'text-gray-400 group-hover:text-soft-periwinkle' }}'></i>
                         Manajemen Anggota
                     </a>
-                @endif
+                @endcan
                 
-                @if(auth()->check() && auth()->user()->peran === 'anggota')
+                @cannot('admin')
                     <p class="px-4 text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-3 mt-6">Area Anggota</p>
-
                     <a href="/riwayat-pinjam" class="group flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-all duration-200 {{ request()->is('riwayat-pinjam*') ? 'bg-soft-periwinkle text-white shadow-md shadow-soft-periwinkle/30' : 'text-gray-500 hover:bg-gray-50 hover:text-soft-periwinkle' }}">
                         <i class='bx bx-book-bookmark text-xl transition-colors {{ request()->is('riwayat-pinjam*') ? 'text-white' : 'text-gray-400 group-hover:text-soft-periwinkle' }}'></i>
                         Buku Pinjamanku
                     </a>
-                @endif
+                @endcannot
             </nav>
 
             <div class="p-4 border-t border-gray-100 bg-gray-50/50">
@@ -79,7 +73,6 @@
         </aside>
 
         <main class="flex-1 flex flex-col overflow-hidden bg-ghost-white">
-            
             <header class="bg-white/80 backdrop-blur-md border-b border-gray-100 px-8 flex justify-between items-center h-[76px] flex-shrink-0 sticky top-0 z-10 shadow-sm">
                 <div class="text-sm font-medium text-gray-500 hidden md:block">
                     <span class="text-gray-400">{{ date('d M Y') }}</span> - Selamat bertugas!

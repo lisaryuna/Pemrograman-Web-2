@@ -29,11 +29,11 @@
             </div>
         </form>
 
-        @if(auth()->check() && auth()->user()->peran === 'admin')
+        @can('admin')
         <a href="/buku/create" class="px-5 py-2.5 bg-soft-periwinkle hover:bg-indigo-600 text-white rounded-xl font-bold shadow-lg shadow-soft-periwinkle/30 transition-all flex items-center gap-2 flex-shrink-0">
             <i class='bx bx-plus'></i> Tambah Buku
         </a>
-        @endif
+        @endcan
     </div>
 </div>
 
@@ -55,9 +55,9 @@
                     <th class="px-6 py-4">Tahun</th>
                     <th class="px-6 py-4 text-center">Stok</th>
                     <th class="px-6 py-4 text-center">Kondisi Fisik</th>
-                    @if(auth()->check() && auth()->user()->peran === 'admin')
+                    @can('admin')
                         <th class="px-6 py-4 text-center">Aksi</th>
-                    @endif
+                    @endcan
                 </tr>
             </thead>
             <tbody class="divide-y divide-gray-50">
@@ -99,7 +99,7 @@
                         @endif
                     </td>
                     
-                    @if(auth()->check() && auth()->user()->peran === 'admin')
+                    @can('admin')
                     <td class="px-6 py-5 text-center">
                         <div class="flex justify-center gap-2">
                             
@@ -120,7 +120,7 @@
 
                         </div>
                     </td>
-                    @endif
+                    @endcan
                 </tr>
                 @endforeach
             </tbody>
