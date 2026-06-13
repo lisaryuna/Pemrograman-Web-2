@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Buku;
 use App\Models\Kategori;
-use app\Http\Requests\BukuRequest;
+use App\Http\Requests\BukuRequest;
 use Illuminate\Http\Request;
 
 class BukuController extends Controller

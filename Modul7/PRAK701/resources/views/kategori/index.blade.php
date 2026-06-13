@@ -1,14 +1,22 @@
 @extends('layouts.app')
 @section('title', 'Manajemen Kategori - PerpusTech')
 @section('content')
-<div class="mb-8 flex items-center gap-4">
-    <div class="w-12 h-12 rounded-2xl bg-white shadow-sm border border-periwinkle/30 flex items-center justify-center text-soft-periwinkle">
-        <i class='bx bx-category text-2xl'></i>
+<div class="mb-8 flex items-center justify-between">
+    <div class="flex items-center gap-4">
+        <div class="w-12 h-12 rounded-2xl bg-white shadow-sm border border-periwinkle/30 flex items-center justify-center text-soft-periwinkle flex-shrink-0">
+            <i class='bx bx-category text-2xl'></i>
+        </div>
+        <div>
+            <h1 class="text-3xl font-bold text-gray-800">Kategori Buku</h1>
+            <p class="text-gray-500 mt-0.5 text-sm">Kelola klasifikasi koleksi buku perpustakaan.</p>
+        </div>
     </div>
-    <div>
-        <h1 class="text-3xl font-bold text-gray-800">Kategori Buku</h1>
-        <p class="text-gray-500 mt-0.5 text-sm">Kelola klasifikasi koleksi buku perpustakaan.</p>
-    </div>
+
+    @can('admin')
+    <a href="/kategori/create" class="px-5 py-2.5 bg-soft-periwinkle hover:bg-indigo-600 text-white rounded-xl font-bold shadow-lg shadow-soft-periwinkle/30 transition-all flex items-center gap-2 flex-shrink-0">
+        <i class='bx bx-plus'></i> Tambah Kategori
+    </a>
+    @endcan
 </div>
 
 @if(session('success'))
